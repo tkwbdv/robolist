@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import CardList from "../components/CardList"
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
-import "./App.css"; // need to import css files that refer to elements in the js file
 
 
 class App extends Component {
@@ -15,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users") // load users from website after component did mount -> update state -> rerender
+    fetch("https://jsonplaceholder.typicode.com/todos") // load users from website after component did mount -> update state -> rerender
       .then(response => response.json())
       .then(users => this.setState({ robots: users }));
   }
@@ -24,17 +23,22 @@ class App extends Component {
     this.setState({ searchfield: event.target.value });
   }
 
+  deleteChange = event => {
+    console.log(event.target);
+  }
+
   render() {
     const { robots, searchfield } = this.state;
-    const filteredRobots = robots.filter(robot => robot.name.toLowerCase().includes(searchfield.toLowerCase()));
+    const filteredRobots = robots.filter(robot => robot.title.toLowerCase().includes(searchfield.toLowerCase()));
+
     return !robots.length ?
       <h1 className="tc f1">Loading...</h1> :
       (
         <div className="tc" >
-          <h1 className="f1">RoboFriends</h1>
+          <h1 className="f1">RoboList</h1>
           <SearchBox searchChange={this.onSearchChange} />
           <Scroll>
-            <CardList robots={filteredRobots} />
+            <CardList robots={filteredRobots} deleteChange={this.deleteChange} />
           </Scroll>
         </div>
       );
