@@ -24,12 +24,20 @@ class App extends Component {
   }
 
   deleteChange = event => {
-    console.log(event.target);
+    const { robots } = this.state;
+    robots.forEach((todo, index) => {
+      if (todo.id === Number(event.target.id)) {
+        robots.splice(index, 1);
+        this.setState({ robots: robots });  // state change forces rerender of CardList
+      }
+    })
   }
 
   render() {
     const { robots, searchfield } = this.state;
     const filteredRobots = robots.filter(robot => robot.title.toLowerCase().includes(searchfield.toLowerCase()));
+
+
 
     return !robots.length ?
       <h1 className="tc f1">Loading...</h1> :
