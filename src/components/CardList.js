@@ -1,15 +1,15 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({ robots, deleteChange }) => {
-  const cardsArray = robots.map((user, index) => {
+const CardList = ({ todos, deleteChange }) => {
+  const cardsArray = todos.map((user, index) => {
     return (
       <Card
-        key={robots[index].id}
-        id={robots[index].id}
-        userId={robots[index].userId}
-        title={robots[index].title}
-        completed={robots[index].completed}
+        key={todos[index].id}
+        id={todos[index].id}
+        userId={todos[index].userId}
+        title={todos[index].title}
+        completed={todos[index].completed}
         deleteChange={deleteChange}
       />
     );

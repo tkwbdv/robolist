@@ -4,7 +4,7 @@ const Card = ({ userId, title, completed, deleteChange, id }) => { /* props is t
   return (
     <div className="flex justify-between bg-light-green br3 pa1 ma2 bw2 shadow-5 pointer bg-animate hover-bg-blue hover-white">
       <span className="flex items-center">
-        <img className="mr3 h2" src={`https://robohash.org/${userId}.png?size=50x50`} alt="robots"></img>
+        <img className="mr3 h2" src={`https://robohash.org/${userId}.png?size=50x50`} alt="todos"></img>
         <h2>{title}</h2>
       </span>
       <span className="flex">

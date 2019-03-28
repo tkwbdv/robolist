@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {  // State: A piece of data that describes our app. Components with a state are called "smart". smart components use the class syntax, because we need "this". As soon as a State changes the App gets rerendered
-      robots: [],
+      todos: [],
       searchfield: "",
     }
   }
@@ -16,7 +16,7 @@ class App extends Component {
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/todos") // load users from website after component did mount -> update state -> rerender
       .then(response => response.json())
-      .then(users => this.setState({ robots: users }));
+      .then(users => this.setState({ todos: users }));
   }
 
   onSearchChange = (event) => { // Arrow Function is a must here, otherwise "this" will not refer to "App" but to the onChange property
@@ -24,29 +24,29 @@ class App extends Component {
   }
 
   deleteChange = event => {
-    const { robots } = this.state;
-    robots.forEach((todo, index) => {
+    const { todos } = this.state;
+    todos.forEach((todo, index) => {
       if (todo.id === Number(event.target.id)) {
-        robots.splice(index, 1);
-        this.setState({ robots: robots });  // state change forces rerender of CardList
+        todos.splice(index, 1);
+        this.setState({ todos: todos });  // state change forces rerender of CardList
       }
     })
   }
 
   render() {
-    const { robots, searchfield } = this.state;
-    const filteredRobots = robots.filter(robot => robot.title.toLowerCase().includes(searchfield.toLowerCase()));
+    const { todos, searchfield } = this.state;
+    const filteredTodos = todos.filter(todo => todo.title.toLowerCase().includes(searchfield.toLowerCase()));
 
 
 
-    return !robots.length ?
+    return !todos.length ?
       <h1 className="tc f1">Loading...</h1> :
       (
         <div className="tc" >
           <h1 className="f1">RoboList</h1>
           <SearchBox searchChange={this.onSearchChange} />
           <Scroll>
-            <CardList robots={filteredRobots} deleteChange={this.deleteChange} />
+            <CardList todos={filteredTodos} deleteChange={this.deleteChange} />
           </Scroll>
         </div>
       );
