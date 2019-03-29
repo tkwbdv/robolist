@@ -37,3 +37,21 @@ button:hover {
 .list {
   margin: auto;
 }
+
+.checkbox {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.radio {
+  color: rgb(206, 204, 204);
+}
+
+.RadioFilter {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.searchBox {
+  justify-self: center;
+}

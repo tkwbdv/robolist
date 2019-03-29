@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CardList from "../components/CardList"
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
+import RadioFilter from "../components/RadioFilter";
 
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
     this.state = {  // State: A piece of data that describes our app. Components with a state are called "smart". smart components use the class syntax, because we need "this". As soon as a State changes the App gets rerendered
       todos: [],
       searchfield: "",
+      radio: "",
     }
   }
 
@@ -40,9 +42,23 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
+  onRadioChange = event => {
+    this.setState({ radio: event.target.value });
+  }
+
   render() {
-    const { todos, searchfield } = this.state;
-    const filteredTodos = todos.filter(todo => todo.title.toLowerCase().includes(searchfield.toLowerCase()));
+    const { todos, searchfield, radio } = this.state;
+    const filteredTodos = todos.filter(todo => {
+      const filter = todo.title.toLowerCase().includes(searchfield.toLowerCase());
+      switch (radio) {
+        case "done":
+          return filter && todo.completed
+        case "todo":
+          return filter && !todo.completed
+        default:
+          return filter
+      }
+    });
 
 
 
@@ -51,7 +67,16 @@ class App extends Component {
       (
         <div className="tc" >
           <h1 className="f1">RoboList</h1>
-          <SearchBox searchChange={this.onSearchChange} />
+
+          <div className="flex justify-center">
+            <div className="flex RadioFilter">
+              <RadioFilter changeRadio={this.onRadioChange} />
+            </div>
+            <div className="flex searchBox">
+              <SearchBox searchChange={this.onSearchChange} />
+            </div>
+          </div>
+
           <Scroll>
             <CardList todos={filteredTodos} deleteChange={this.deleteChange} toggleCompleted={this.toggleCompleted} />
           </Scroll>
