@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({ todos, deleteChange }) => {
+const CardList = ({ todos, deleteChange, toggleCompleted }) => {
   const cardsArray = todos.map((user, index) => {
     return (
       <Card
@@ -11,6 +11,7 @@ const CardList = ({ todos, deleteChange }) => {
         title={todos[index].title}
         completed={todos[index].completed}
         deleteChange={deleteChange}
+        toggleCompleted={toggleCompleted}
       />
     );
     //have to give Card a unique "Key" prop when we loop which does not change (index is not good here because if the array items get moved the index changes). React can uniquely identify each card if it needs to change the DOM

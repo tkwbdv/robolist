@@ -33,6 +33,13 @@ class App extends Component {
     })
   }
 
+  toggleCompleted = event => {
+    const index = this.state.todos.findIndex(todo => todo.id === Number(event.target.id));
+    const { todos } = this.state;
+    todos[index].completed = event.target.checked;
+    this.setState({ todos: todos });
+  }
+
   render() {
     const { todos, searchfield } = this.state;
     const filteredTodos = todos.filter(todo => todo.title.toLowerCase().includes(searchfield.toLowerCase()));
@@ -46,7 +53,7 @@ class App extends Component {
           <h1 className="f1">RoboList</h1>
           <SearchBox searchChange={this.onSearchChange} />
           <Scroll>
-            <CardList todos={filteredTodos} deleteChange={this.deleteChange} />
+            <CardList todos={filteredTodos} deleteChange={this.deleteChange} toggleCompleted={this.toggleCompleted} />
           </Scroll>
         </div>
       );
