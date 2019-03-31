@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 
 const CardList = ({ todos, deleteChange, toggleCompleted }) => {
-  const cardsArray = todos.map((user, index) => {
+  const cardsArray = todos.map((todo, index) => {
     return (
       <Card
         key={todos[index].id}
