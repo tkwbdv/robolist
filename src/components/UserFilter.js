@@ -3,9 +3,10 @@ import React from "react";
 
 
 
-const UserFilter = ({ userFilterChange, userArray }) => {
+const UserFilter = ({ userFilterChange, todos, userArray }) => {
+  // userArray(todos);
 
-  const userAvatars = userArray.map((userId) => {
+  const userAvatars = userArray(todos).map((userId) => {
     //Generate array with matching userimages
     return (
       <span key={userId} onClick={userFilterChange}>

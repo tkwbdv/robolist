@@ -19,27 +19,35 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch("https://jsonplaceholder.typicode.com/todos") // load users from website after component did mount -> update state -> rerender
-    //   .then(response => response.json())
-    //   .then(users => this.setState({ todos: users }));
-
-
     fetch("https://jsonplaceholder.typicode.com/todos") // load users from website after component did mount -> update state -> rerender
       .then(response => response.json())
       .then(users => {
         this.setState({ todos: users })
-        const userArray = this.state.todos.reduce((acc, todo) => {
-          //Generate Array of present userIds in filtered todos
-          if (todo.userId === acc[acc.length - 1]) {
-            return acc;
-          } else {
-            acc.push(todo.userId);
-            return acc;
-          }
-        }, [])
-        this.setState({ userFilter: userArray });
+        // const userArray = this.state.todos.reduce((acc, todo) => {
+        //   //Generate Array of present userIds in filtered todos
+        //   if (todo.userId === acc[acc.length - 1]) {
+        //     return acc;
+        //   } else {
+        //     acc.push(todo.userId);
+        //     return acc;
+        //   }
+        // }, [])
+
+        this.setState({ userFilter: this.generateUserArray(this.state.todos) });
       });
 
+  }
+
+  generateUserArray = (todos) => {
+    return todos.reduce((acc, todo) => {
+      //Generate Array of present userIds in filtered todos
+      if (todo.userId === acc[acc.length - 1]) {
+        return acc;
+      } else {
+        acc.push(todo.userId);
+        return acc;
+      }
+    }, [])
   }
 
   onSearchChange = (event) => { // Arrow Function is a must here, otherwise "this" will not refer to "App" but to the onChange property
@@ -72,6 +80,10 @@ class App extends Component {
     this.setState({ userFilter: [Number(event.target.id)] });
   }
 
+  ShowAllUsersHandler = event => {
+
+  }
+
   render() {
     const { todos, searchfield, radio, userFilter } = this.state;
 
@@ -97,15 +109,15 @@ class App extends Component {
       (
         <div className="tc" >
 
-          <h1 className="f1 mb2">RoboList</h1>
+          <h1 className="f1">RoboList</h1>
 
-          <div className="mb2">
-            <UserFilter todos={filteredTodos} userFilterChange={this.userFilterChange} userArray={this.state.userFilter} />
-          </div>
-
-          <div className="flex items-center justify-around mb1">
+          <div className="flex items-center justify-between ma2">
             <div className="RadioFilter">
+              <button onClick={this.ShowAllUsersHandler}>All Users</button>
               <RadioFilter changeRadio={this.onRadioChange} />
+            </div>
+            <div className="h3">
+              <UserFilter todos={filteredTodos} userFilterChange={this.userFilterChange} userArray={this.generateUserArray} />
             </div>
             <div className="searchBox">
               <SearchBox searchChange={this.onSearchChange} />
