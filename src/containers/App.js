@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   ShowAllUsersHandler = event => {
-
+    this.setState({ userFilter: this.generateUserArray(this.state.todos) });
   }
 
   render() {

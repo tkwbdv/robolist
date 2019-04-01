@@ -5,15 +5,15 @@ const RadioFilter = ({ changeRadio }) => {
     <div className="flex radio">
       <label>
         <input className="ma2" type="radio" name="filter" value="all" onClick={changeRadio} defaultChecked />
-        all
+        All Tasks
     </label>
       <label>
         <input className="ma2" type="radio" name="filter" value="done" onClick={changeRadio} />
-        done
+        Done
     </label>
       <label>
         <input className="ma2" type="radio" name="filter" value="todo" onClick={changeRadio} />
-        todo
+        Open
     </label>
     </div>
   )
