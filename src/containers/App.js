@@ -4,6 +4,7 @@ import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
 import RadioFilter from "../components/RadioFilter";
 import UserFilter from "../components/UserFilter";
+import AllUsersButton from "../components/AllUsersButton";
 
 
 class App extends Component {
@@ -23,16 +24,6 @@ class App extends Component {
       .then(response => response.json())
       .then(users => {
         this.setState({ todos: users })
-        // const userArray = this.state.todos.reduce((acc, todo) => {
-        //   //Generate Array of present userIds in filtered todos
-        //   if (todo.userId === acc[acc.length - 1]) {
-        //     return acc;
-        //   } else {
-        //     acc.push(todo.userId);
-        //     return acc;
-        //   }
-        // }, [])
-
         this.setState({ userFilter: this.generateUserArray(this.state.todos) });
       });
 
@@ -76,7 +67,6 @@ class App extends Component {
   }
 
   userFilterChange = event => {
-    console.log("UserFilterEventID", event.target.id);
     this.setState({ userFilter: [Number(event.target.id)] });
   }
 
@@ -86,8 +76,6 @@ class App extends Component {
 
   render() {
     const { todos, searchfield, radio, userFilter } = this.state;
-
-    console.log("userFilterArray", userFilter);
 
     const filteredTodos = todos.filter(todo => {
       const filter = todo.title.toLowerCase().includes(searchfield.toLowerCase());  // filter is the searchfield input
@@ -113,11 +101,11 @@ class App extends Component {
 
           <div className="flex items-center justify-between ma2">
             <div className="RadioFilter">
-              <button onClick={this.ShowAllUsersHandler}>All Users</button>
               <RadioFilter changeRadio={this.onRadioChange} />
             </div>
-            <div className="h3">
+            <div className="h3 flex">
               <UserFilter todos={filteredTodos} userFilterChange={this.userFilterChange} userArray={this.generateUserArray} />
+              <AllUsersButton className="" userTodos={this.generateUserArray(this.state.todos)} ShowAllUsersHandler={this.ShowAllUsersHandler} userFilter={this.state.userFilter} />
             </div>
             <div className="searchBox">
               <SearchBox searchChange={this.onSearchChange} />
