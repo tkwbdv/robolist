@@ -6,7 +6,7 @@ const AllUsersButton = ({ userFilter, ShowAllUsersHandler, userTodos }) => {
   }
   return (
     <div>
-      <button onClick={ShowAllUsersHandler}>All Users</button>
+      <button className="f6 br2 ph3 pv2 white bg-dark-green" onClick={ShowAllUsersHandler}>All Users</button>
     </div>
   )
 }

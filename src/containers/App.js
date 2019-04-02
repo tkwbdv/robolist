@@ -103,9 +103,9 @@ class App extends Component {
             <div className="RadioFilter">
               <RadioFilter changeRadio={this.onRadioChange} />
             </div>
-            <div className="h3 flex">
+            <div className="h3 flex items-center">
               <UserFilter todos={filteredTodos} userFilterChange={this.userFilterChange} userArray={this.generateUserArray} />
-              <AllUsersButton className="" userTodos={this.generateUserArray(this.state.todos)} ShowAllUsersHandler={this.ShowAllUsersHandler} userFilter={this.state.userFilter} />
+              <AllUsersButton userTodos={this.generateUserArray(this.state.todos)} ShowAllUsersHandler={this.ShowAllUsersHandler} userFilter={this.state.userFilter} />
             </div>
             <div className="searchBox">
               <SearchBox searchChange={this.onSearchChange} />

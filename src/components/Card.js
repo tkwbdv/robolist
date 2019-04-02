@@ -11,7 +11,7 @@ const Card = ({ userId, title, completed, deleteChange, id, toggleCompleted }) =
             <h2>{title}</h2>
           </span>
           <span className="flex">
-            <button onClick={deleteChange} id={id}>delete</button>
+            <button className="delete-btn" onClick={deleteChange} id={id}>delete</button>
           </span>
         </div>
       </label>
@@ -26,7 +26,7 @@ const Card = ({ userId, title, completed, deleteChange, id, toggleCompleted }) =
               <h2>{title}</h2>
             </span>
             <span className="flex">
-              <button onClick={deleteChange} id={id}>delete</button>
+              <button className="delete-btn" onClick={deleteChange} id={id}>delete</button>
             </span>
           </div>
         </label>
