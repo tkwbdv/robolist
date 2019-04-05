@@ -1,21 +1,24 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({ robots }) => {
-  const cardsArray = robots.map((user, index) => {
+const CardList = ({ todos, deleteChange, toggleCompleted }) => {
+  const cardsArray = todos.map((todo, index) => {
     return (
       <Card
-        key={robots[index].id}
-        id={robots[index].id}
-        name={robots[index].name}
-        username={robots[index].username}
-        email={robots[index].email} />
+        key={todos[index].id}
+        id={todos[index].id}
+        userId={todos[index].userId}
+        title={todos[index].title}
+        completed={todos[index].completed}
+        deleteChange={deleteChange}
+        toggleCompleted={toggleCompleted}
+      />
     );
     //have to give Card a unique "Key" prop when we loop which does not change (index is not good here because if the array items get moved the index changes). React can uniquely identify each card if it needs to change the DOM
   })
 
   return (
-    <div>
+    <div className="list w-90">
       {cardsArray}  {/*we could replace cardsArray directly with the code written above because it is just a js variable we declared. I leave it as is for readibility */}
     </div>
   );

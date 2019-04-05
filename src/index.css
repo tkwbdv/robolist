@@ -1,6 +1,48 @@
+@font-face {
+  font-family: 'SEGA LOGO FONT';
+  font-style: normal;
+  font-weight: normal;
+  src: local('SEGA LOGO FONT'), url('SEGA.woff') format('woff');
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background: linear-gradient(to left, rgba(7,27,82,1) 0%, rgba(0,128,128,1) 100%);
+}
+
+h1 {
+  font-family: 'SEGA LOGO FONT';
+  font-weight: 200;
+  color: #0ccac4;
+}
+
+.delete-btn {
+  background-color: white;
+  font-weight: bold;
+  color: black;
+  border: 2px solid red;
+  border-radius: 3px;
+  align-self: center;
+  height: 100%;
+  transition: 0.4s;
+}
+
+.delete-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+.list {
+  margin: auto;
+}
+
+.checkbox {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.radio {
+  color: rgb(206, 204, 204);
 }
